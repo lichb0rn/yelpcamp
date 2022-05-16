@@ -1,17 +1,20 @@
 const express = require("express");
 const path = require("path");
 const methodOverride = require("method-override");
+
 const mongoose = require("mongoose");
+
 const Campground = require("./models/campground");
-const res = require("express/lib/response");
-const { findById } = require("./models/campground");
-const req = require("express/lib/request");
+
+
 
 mongoose.connect("mongodb://localhost:27017/yelp-camp")
     .then(() => console.log("Mongo: Connection opened"))
     .catch(err => console.log(err));
 
+const engine = require("ejs-mate");
 const app = express();
+app.engine("ejs", engine);
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.urlencoded({ extended: true }));
