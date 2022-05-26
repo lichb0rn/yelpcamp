@@ -58,8 +58,6 @@ app.use((req, res, next) => {
     if (!["/login", "/register", "/"].includes(req.originalUrl)) {
         req.session.returnTo = req.originalUrl;
     }
-    console.log("Session in middleware")
-    console.log(req.session)
     req.session.save((err) => {
         if (err) next(err);
         next();
